@@ -1,0 +1,293 @@
+<div id="admin-app-container" class="text-center" style="margin-top: 4%;">
+    <img src="/src/images/furyfit-logo.png" height="125px" width="125px" />
+    <br />
+    <span>
+        <h1>Panel de administrador FuryFit</h1>
+    </span>
+    <span>Haz click en lo que quieras administrar, puedes agregar, borrar o modificar la información de lo que
+        elijas</span>
+    <div id="buttons-container" style="margin-top: 4%; width: 100%;">
+        <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-primary"
+            ng-click="appCtrl.activateWorkoutsSection()">Entrenamientos</button>
+        <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-primary"
+            ng-click="appCtrl.activateDietSection()">Dietas</button>
+        <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-primary"
+            ng-click="appCtrl.activateLinksSection()">Enlaces de Interés</button>
+        <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-primary"
+            ng-click="appCtrl.activateFAQsSection()">Preguntas
+            Frecuentes</button>
+    </div>
+
+    <section id="workouts-section" ng-if="appCtrl.displayControlls.adminWorkouts">
+        <div id="table-info-container" style="margin-top: 5%;">
+            <table id="workouts-table" class="text-center table table-bordered" style="margin: auto; width: 75%;">
+                <tr>
+                    <th><b>ID</b></th>
+                    <th><b>Nombre</b></th>
+                    <th><b>Tipo</b></th>
+                    <th><b>Descripción</b></th>
+                    <th><b>Elección</b></th>
+                </tr>
+                <tr ng-repeat="workout in appCtrl.workoutsList">
+                    <td>{{workout.id}}</td> <!-- {{workout.id}} -->
+                    <td>{{workout.name}}</td> <!-- {{workout.name}} -->
+                    <td>{{workout.type}}</td> <!-- {{workout.type}} -->
+                    <td>{{workout.description}}</td> <!-- {{workout.description}} -->
+                    <td>
+                        <input type="radio" name="workouts" ng-model="appCtrl.selectedWorkout" ng-value="{{workout}}">
+                        <!-- ng-value="{{workout.id}}" -->
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-top: 5%;">
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-danger"
+                    ng-click="appCtrl.deleteSelectedWorkout()">Eliminar</button>
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-info"
+                    ng-click="appCtrl.modifySelectedWorkout()">Modificar</button>
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-success"
+                    ng-click="appCtrl.addNewWorkout()">Agregar</button>
+            </div>
+        </div>
+        <div ng-if="appCtrl.displayWorkoutCreationForm" style="margin-top: 4%;">
+            <table class="table table-bordered" style="margin: auto; width: 85%;">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td><input type="number" ng-model="appCtrl.newWorkoutID"></td>
+                    <td><input type="text" ng-model="appCtrl.newWorkoutName"></td>
+                    <td><input type="text" ng-model="appCtrl.newWorkoutType"></td>
+                    <td><textarea ng-model="appCtrl.newWorkoutDesc"></textarea></td>
+                </tr>
+            </table>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%;" class="btn btn-success"
+                ng-click="appCtrl.confirmAddNewWorkout()">Confirmar</button>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%; margin-left: 10%;"
+                class="btn btn-danger" ng-click="appCtrl.cancelAndCloseNewWorkoutForm()">Calcelar</button>
+        </div>
+        <div ng-if="appCtrl.displayWorkoutModificationForm" style="margin-top: 4%;">
+            <table class="table table-bordered" style="margin: auto; width: 85%;">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td><input type="number" ng-model="appCtrl.newWorkoutID" disabled></td>
+                    <td><input type="text" ng-model="appCtrl.newWorkoutName"></td>
+                    <td><input type="text" ng-model="appCtrl.newWorkoutType"></td>
+                    <td><textarea ng-model="appCtrl.newWorkoutDesc"></textarea></td>
+                </tr>
+            </table>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%;" class="btn btn-success"
+                ng-click="appCtrl.confirmModifyWorkout()">Confirmar</button>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%; margin-left: 5%;"
+                class="btn btn-danger" ng-click="appCtrl.cancelAndCloseModifyWorkoutForm()">Cancelar</button>
+        </div>
+    </section>
+
+    <section id="diets-section" ng-if="appCtrl.displayControlls.adminDiets">
+        <div id="table-info-container" style="margin-top: 5%;">
+            <table id="diets-table" class="text-center table table-bordered" style="margin: auto; width: 75%;">
+                <tr>
+                    <th><b>ID</b></th>
+                    <th><b>Nombre</b></th>
+                    <th><b>Tipo</b></th>
+                    <th><b>Descripción</b></th>
+                    <th><b>Elección</b></th>
+                </tr>
+                <tr ng-repeat="diet in appCtrl.dietList">
+                    <td>{{diet.id}}</td> <!-- {{diet.id}} -->
+                    <td>{{diet.name}}</td> <!-- {{diet.name}} -->
+                    <td>{{diet.type}}</td> <!-- {{diet.type}} -->
+                    <td>{{diet.description}}</td> <!-- {{diet.description}} -->
+                    <td>
+                        <input type="radio" name="diets" ng-model="appCtrl.selecteddiet" ng-value="{{diet}}">
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-top: 5%;">
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-danger"
+                    ng-click="appCtrl.deleteSelectedDiet()">Eliminar</button>
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-info"
+                    ng-click="appCtrl.modifySelectedDiet()">Modificar</button>
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-success"
+                    ng-click="appCtrl.addNewDiet()">Agregar</button>
+            </div>
+        </div>
+        <div ng-if="appCtrl.displayDietCreationForm" style="margin-top: 4%;">
+            <table class="table table-bordered" style="margin: auto; width: 85%;">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td><input type="number" ng-model="appCtrl.newDietID"></td>
+                    <td><input type="text" ng-model="appCtrl.newDietName"></td>
+                    <td><input type="text" ng-model="appCtrl.newDietType"></td>
+                    <td><textarea ng-model="appCtrl.newDietDesc"></textarea></td>
+                </tr>
+            </table>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%;" class="btn btn-success"
+                ng-click="appCtrl.confirmAddNewDiet()">Confirmar</button>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%; margin-left: 5%;"
+                class="btn btn-danger" ng-click="appCtrl.cancelAndCloseNewDietForm()">Cancelar</button>
+        </div>
+        <div ng-if="appCtrl.displayDietModificationForm" style="margin-top: 4%;">
+            <table class="table table-bordered" style="margin: auto; width: 85%;">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td><input type="number" ng-model="appCtrl.newDietID" disabled></td>
+                    <td><input type="text" ng-model="appCtrl.newDietName"></td>
+                    <td><input type="text" ng-model="appCtrl.newDietType"></td>
+                    <td><textarea ng-model="appCtrl.newDietDesc"></textarea></td>
+                </tr>
+            </table>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%;" class="btn btn-success"
+                ng-click="appCtrl.confirmModifyDiet()">Confirmar</button>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%; margin-left: 5%;"
+                class="btn btn-danger" ng-click="appCtrl.cancelAndCloseModifyDietForm()">Cancelar</button>
+        </div>
+    </section>
+
+    <section id="links-section" ng-if="appCtrl.displayControlls.adminLinks">
+        <div id="table-info-container" style="margin-top: 5%;">
+            <table id="links-table" class="text-center table table-bordered" style="margin: auto; width: 75%;">
+                <tr>
+                    <th><b>ID</b></th>
+                    <th><b>URL del Sitio</b></th>
+                    <th><b>URL de la Imagen</b></th>
+                    <th><b>Elección</b></th>
+                </tr>
+                <tr ng-repeat="link in appCtrl.linksList">
+                    <td>{{link.id}}</td> <!-- {{link.id}} -->
+                    <td>{{link.pageLink}}</td> <!-- {{link.siteURL}} -->
+                    <td>{{link.picSRC}}</td> <!-- {{link.picSRC}} -->
+                    <td>
+                        <input type="radio" name="links" ng-model="appCtrl.selectedLink" ng-value="{{link}}">
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-top: 5%;">
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-danger"
+                    ng-click="appCtrl.deleteSelectedLink()">Eliminar</button>
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-info"
+                    ng-click="appCtrl.modifySelectedLink()">Modificar</button>
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-success"
+                    ng-click="appCtrl.addNewLink()">Agregar</button>
+            </div>
+        </div>
+        <div ng-if="appCtrl.displayLinksCreationForm" style="margin-top: 4%;">
+            <table class="table table-bordered" style="margin: auto; width: 85%;">
+                <tr>
+                    <th>ID</th>
+                    <th>URL del Sitio</th>
+                    <th>URL de la Imagen</th>
+                </tr>
+                <tr>
+                    <td><input type="number" ng-model="appCtrl.newLinkID"></td>
+                    <td><input type="text" ng-model="appCtrl.newLinkPageURL"></td>
+                    <td><input type="text" ng-model="appCtrl.newLinkImageURL"></td>
+                </tr>
+            </table>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%;" class="btn btn-success"
+                ng-click="appCtrl.confirmAddNewLink()">Confirmar</button>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%; margin-left: 5%;"
+                class="btn btn-danger" ng-click="appCtrl.cancelAndCloseNewLinkForm()">Cancelar</button>
+        </div>
+        <div ng-if="appCtrl.displayLinkModificationForm" style="margin-top: 4%;">
+            <table class="table table-bordered" style="margin: auto; width: 85%;">
+                <tr>
+                    <th>ID</th>
+                    <th>URL del Sitio</th>
+                    <th>URL de la Imagen</th>
+                </tr>
+                <tr>
+                    <td><input type="number" ng-model="appCtrl.newLinkID" disabled></td>
+                    <td><input type="text" ng-model="appCtrl.newLinkPageURL"></td>
+                    <td><input type="text" ng-model="appCtrl.newLinkImageURL"></td>
+                </tr>
+            </table>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%;" class="btn btn-success"
+                ng-click="appCtrl.confirmModifyLink()">Confirmar</button>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%; margin-left: 5%;"
+                class="btn btn-danger" ng-click="appCtrl.cancelAndCloseModifyLinksForm()">Cancelar</button>
+        </div>
+    </section>
+
+    <section id="questions-section" ng-if="appCtrl.displayControlls.adminFaqs">
+        <div id="table-info-container" style="margin-top: 5%;">
+            <table id="questions-table" class="text-center table table-bordered" style="margin: auto; width: 75%;">
+                <tr>
+                    <th><b>ID</b></th>
+                    <th><b>Pregunta</b></th>
+                    <th><b>Respuesta</b></th>
+                    <th><b>Elección</b></th>
+                </tr>
+                <tr ng-repeat="question in appCtrl.faqsList"> <!-- ng-repeat="question in appCtrl.faqsList" -->
+                    <td>{{question.id}}</td> <!-- {{question.id}} -->
+                    <td>{{question.question}}</td> <!-- {{question.pregunta}} -->
+                    <td>{{question.answer}}</td> <!-- {{question.answer}} -->
+                    <td>
+                        <input type="radio" name="links" ng-model="appCtrl.selectedQuestion" ng-value="{{question}}"> <!-- ng-value="{{question.id}}" -->
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-top: 5%;">
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-danger"
+                    ng-click="appCtrl.deleteSelectedQuestion()">Eliminar</button>
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-info"
+                    ng-click="appCtrl.modifySelectedQuestion()">Modificar</button>
+                <button style="margin-left: 5%; width: 200px; height: 50px;" class="btn btn-success"
+                    ng-click="appCtrl.addNewQuestion()">Agregar</button>
+            </div>
+        </div>
+        <div ng-if="appCtrl.displayQuestionsCreationForm" style="margin-top: 4%;">
+            <table class="table table-bordered" style="margin: auto; width: 85%;">
+                <tr>
+                    <th>ID</th>
+                    <th>Pregunta</th>
+                    <th>Respuesta</th>
+                </tr>
+                <tr>
+                    <td><input type="number" ng-model="appCtrl.newQuestionID"></td>
+                    <td><input type="text" ng-model="appCtrl.newQuestionQ"></td>
+                    <td><textarea ng-model="appCtrl.newQuestionAnswer"></textarea></td>
+                </tr>
+            </table>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%;" class="btn btn-success"
+                ng-click="appCtrl.confirmAddNewQuestion()">Confirmar</button>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%; margin-left: 5%;"
+                class="btn btn-danger" ng-click="appCtrl.cancelAndCloseNewQuestionForm()">Cancelar</button>
+        </div>
+        <div ng-if="appCtrl.displayQuestionsModificationForm" style="margin-top: 4%;">
+            <table class="table table-bordered" style="margin: auto; width: 85%;">
+                <tr>
+                    <th>ID</th>
+                    <th>Pregunta</th>
+                    <th>Respuesta</th>
+                </tr>
+                <tr>
+                    <td><input type="number" ng-model="appCtrl.newQuestionID" disabled></td>
+                    <td><input type="text" ng-model="appCtrl.newQuestionQ"></td>
+                    <td><textarea ng-model="appCtrl.newQuestionAnswer"></textarea></td>
+                </tr>
+            </table>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%;" class="btn btn-success"
+                ng-click="appCtrl.confirmModifyQuestion()">Confirmar</button>
+            <button style="width: 200px; height: 50px; margin-top: 3%; margin-bottom: 5%; margin-left: 5%;"
+                class="btn btn-danger" ng-click="appCtrl.cancelAndCloseModifyQuestionsForm()">Cancelar</button>
+        </div>
+    </section>
+</div>

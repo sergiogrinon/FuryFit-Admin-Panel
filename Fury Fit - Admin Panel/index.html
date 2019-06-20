@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html data-ng-app="furyfitadm">
+    <head>
+        <meta charset="utf-8">
+        <title>Fury Fit - Admin Panel</title>
+        <link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
+
+        <!-- StyleSheet declaration (Bootstrap) -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="node_modules/sweetalert/lib/sweet-alert.css">
+    </head>
+
+    <body>
+        <main-container></main-container>
+    </body>
+
+    <!-- Script declaration -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+    <script src="node_modules/sweetalert/lib/sweet-alert.min.js"></script>
+
+    <!-- App module -->
+    <script src="src/components/ff-admin-app-module.js"></script>
+
+    <!-- SERVICES -->
+    <!-- Diet services (in dependency order) -->
+    <script src="src/services/http-services/fury-fit-diets-service/proxies/fury-fit-diets-proxy.js"></script>
+    <script src="src/services/http-services/fury-fit-diets-service/services/fury-fit-diets-http-service.js"></script>
+
+    <!-- Workout services (in dependency order) -->
+    <script src="src/services/http-services/fury-fit-workouts-service/proxies/fury-fit-workouts-proxy.js"></script>
+    <script src="src/services/http-services/fury-fit-workouts-service/services/fury-fit-workouts-http-service.js"></script>
+
+    <!-- Interest links services (in dependency order) -->
+    <script src="src/services/http-services/fury-fit-interestlinks-service/proxies/fury-fit-interestlinks-proxy.js"></script>
+    <script src="src/services/http-services/fury-fit-interestlinks-service/services/fury-fit-interestlinks-http-service.js"></script>
+
+    <!-- FAQs services (in dependency order) -->
+    <script src="src/services/http-services/fury-fit-faqs-service/proxies/fury-fit-faqs-service-proxy.js"></script>
+    <script src="src/services/http-services/fury-fit-faqs-service/services/fury-fit-faqs-service-http-service.js"></script>
+
+    <!-- Page Service -->
+    <script src="src/services/ff-admin-app-service.js"></script>
+
+    <!-- Container component and controller -->
+    <script src="src/components/main-container/components/ff-admin-app-component.js"></script>
+    <script src="src/components/main-container/controllers/ff-admin-app-controller.js"></script>
+</html>
